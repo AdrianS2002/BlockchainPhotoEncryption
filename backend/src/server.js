@@ -9,6 +9,7 @@ import { UserRepository } from "./repository/user.repository.js";
 import { loadAllowedAddresses } from "./utils/allowlist.js";
 import { ensureSchema } from "../src/utils/db/ensure-schema.js"
 import { seedHardhatUsers } from "../src/utils/seed-hardhat-users.js";
+import { usersRouter } from "./routes/users.routes.js";
 
 const app = express();
 
@@ -36,7 +37,7 @@ app.get("/config", (req, res) => res.json({
 
 
 app.use("/auth", authRouter);
-
+app.use("/users", usersRouter);
 app.get("/me", jwtGuard, (req, res) => {
   res.json({ user: req.user });
 });

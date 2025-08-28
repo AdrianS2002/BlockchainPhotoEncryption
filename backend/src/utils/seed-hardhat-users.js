@@ -5,8 +5,6 @@ import { JsonRpcProvider } from "ethers";
 export async function seedHardhatUsers() {
   const rpc = process.env.HARDHAT_RPC || "http://127.0.0.1:8545";
   const provider = new JsonRpcProvider(rpc);
-
-  // în v6 folosim RPC direct:
   const accounts = await provider.send("eth_accounts", []);
 
   if (!Array.isArray(accounts) || accounts.length === 0) {
@@ -14,7 +12,6 @@ export async function seedHardhatUsers() {
     return;
   }
 
-  // Inserăm toate adresele: first_name/last_name = ""
   const conn = await db.getConnection();
   try {
     await conn.query("START TRANSACTION");
