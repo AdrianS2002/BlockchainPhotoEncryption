@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import detectEthereumProvider from '@metamask/detect-provider';
 import { BrowserProvider, getAddress } from 'ethers';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-auth',
@@ -22,6 +23,8 @@ export class AuthComponent {
   clientId: string | null = null;
   networkWarn = false;
 
+  constructor(private router: Router) {}
+
   private async ethProvider(): Promise<any> {
     const p = await detectEthereumProvider({ mustBeMetaMask: true }) as any;
     if (!p) throw new Error('MetaMask nu este instalat.');
@@ -34,14 +37,14 @@ export class AuthComponent {
     try {
       const p = await this.ethProvider();
       const current = await p.request({ method: 'eth_chainId' });
-      if (current === '0x7a69') { 
+      if (current === '0x539') { 
         this.networkWarn = false;
         return;
       }
 
       await p.request({
         method: 'wallet_switchEthereumChain',
-        params: [{ chainId: '0x7a69' }] 
+        params: [{ chainId: '0x539' }] 
       });
       this.networkWarn = false;
     } catch (e: any) {
@@ -52,7 +55,7 @@ export class AuthComponent {
           await p.request({
             method: 'wallet_addEthereumChain',
             params: [{
-              chainId: '539',
+              chainId: '0x539',
               chainName: 'Hardhat Localhost 1337',
               rpcUrls: ['http://127.0.0.1:8545'],
               nativeCurrency: { name: 'ETH', symbol: 'ETH', decimals: 18 }
@@ -74,7 +77,7 @@ export class AuthComponent {
     try {
       const p = await this.ethProvider();
       const chainId = await p.request({ method: 'eth_chainId' });
-      this.networkWarn = chainId !== '539';
+      this.networkWarn = chainId !== '0x539';
     } catch {
       this.networkWarn = true;
     }
@@ -97,7 +100,7 @@ export class AuthComponent {
   }): string {
     const domain = params.domain ?? window.location.hostname; 
     const origin = params.uri ?? window.location.origin;
-    const chainId = params.chainId ?? 31337;
+    const chainId = params.chainId ?? 1337;
     const checksum = getAddress(params.address);
 
     const lines: string[] = [];
@@ -174,6 +177,9 @@ export class AuthComponent {
 
       this.address = address;
       this.token = data.token;
+
+      await this.router.navigate(['/encryption_decryption']);
+      console.log('Navigated to encryption_decryption');
     } catch (e: any) {
       this.error = e?.message || 'Eroare la login';
     } finally {

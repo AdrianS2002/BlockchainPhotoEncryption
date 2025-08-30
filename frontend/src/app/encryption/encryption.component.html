@@ -1,0 +1,52 @@
+<div class="page">
+    <div class="card card-tight">
+        <h2 class="title">Encrypt image</h2>
+
+        <div class="grid">
+            <div class="row">
+
+                <label class="filebox">
+                    <input #fileInput type="file" accept="image/*" (change)="onFileChange($event)" />
+                    <div class="drop" *ngIf="!previewUrl">
+                        <div class="drop-text">
+                            <strong>Selectează o imagine</strong>
+                            <span>PNG, JPG, JPEG</span>
+                        </div>
+                    </div>
+                </label>
+
+                <div class="preview" *ngIf="previewUrl">
+                    <img [src]="previewUrl" alt="preview" />
+                    <div class="preview-actions">
+                        <button type="button" class="btn btn-secondary btn-sm change" (click)="fileInput.click()">
+                            Schimbă imaginea
+                        </button>
+                        <button type="button" class="btn btn-secondary btn-sm delete" (click)="clearFile()">
+                            Șterge
+                        </button>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label for="recipient">Destinatar</label>
+                    <select id="recipient" [(ngModel)]="selectedAddress" class="select">
+                        <option value="" disabled selected>Alege utilizatorul…</option>
+                        <option *ngFor="let u of users" [value]="u.address">
+                            {{ u.name || short(u.address) }} ({{ short(u.address) }})
+                        </option>
+                    </select>
+                </div>
+
+                <div class="actions">
+                    <button class="btn btn-primary encrypt" (click)="encryptAndSend()" [disabled]="!canEncrypt()">
+                        Encrypt & Send
+                    </button>
+                </div>
+                <div *ngIf="loading" class="spinner"></div>
+                <div *ngIf="error" class="error-message">{{ error }}</div>
+                <div *ngIf="okMessage" class="success-message">{{ okMessage }}</div>
+
+            </div>
+        </div>
+    </div>
+</div>
