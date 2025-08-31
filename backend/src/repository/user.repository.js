@@ -19,8 +19,6 @@ async function upsertUserDB(eth_address, first_name = "", last_name = "") {
     `INSERT INTO users (eth_address, first_name, last_name)
      VALUES (?, ?, ?)
      ON DUPLICATE KEY UPDATE
-       first_name = VALUES(first_name),
-       last_name  = VALUES(last_name),
        updated_at = NOW()`,
     [eth_address, first_name, last_name]
   );
