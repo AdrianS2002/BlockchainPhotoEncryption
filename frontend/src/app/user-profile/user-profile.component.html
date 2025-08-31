@@ -1,0 +1,49 @@
+<div class="page">
+  <div class="card card-tight">
+    <h2 class="title">User profile</h2>
+
+    <form class="form" [formGroup]="form" (ngSubmit)="save()">
+      <div class="grid">
+        <div class="row">
+
+          <div class="field">
+            <label>Adresa</label>
+            <input type="text" formControlName="eth_address" readonly />
+          </div>
+
+          <div class="field half">
+            <label>Prenume</label>
+            <input type="text" formControlName="first_name" placeholder="Prenume" />
+          </div>
+
+          <div class="field half">
+            <label>Nume</label>
+            <input type="text" formControlName="last_name" placeholder="Nume" />
+          </div>
+
+          <div class="field half">
+            <label>Creat la</label>
+            <input type="text" formControlName="created_at" readonly />
+          </div>
+
+          <div class="field half">
+            <label>Actualizat la</label>
+            <input type="text" formControlName="updated_at" readonly />
+          </div>
+
+          <div class="actions">
+            <button class="btn btn-primary" type="submit" [disabled]="loading">
+              {{ loading ? 'Se salvează…' : 'Update' }}
+            </button>
+          </div>
+
+          <div *ngIf="loading" class="spinner"></div>
+          
+
+        </div>
+        <div *ngIf="error" class="error-message">{{ error }}</div>
+          <div *ngIf="okMessage" class="success-message">{{ okMessage }}</div>
+      </div>
+    </form>
+  </div>
+</div>

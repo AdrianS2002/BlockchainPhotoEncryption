@@ -1,56 +1,15 @@
- <div class="page">
-      <div class="card">
-        <div class="hdr">
-          <div class="title">Sign-In With MetaMask </div>
-        </div>
-
-        <div class="grid">
-          <div class="row">
-            <button class="btn btn-primary" (click)="login()" [disabled]="loading || switching">
-              {{ loading ? 'Se conectează…' : 'Conectează-te cu MetaMask' }}
-            </button>
-            <button class="btn" (click)="whoAmI()" [disabled]="!token || loading">/me</button>
-            <button class="btn btn-danger" (click)="reset()" [disabled]="loading">Reset</button>
-            <span class="sp"></span>
-            <div class="status" *ngIf="!loading && !error && !address">
-              <span class="dot idle"></span><span class="hint">Neautentificat</span>
-            </div>
-            <div class="status" *ngIf="address">
-              <span class="dot ok"></span><span class="hint">Autentificat</span>
-            </div>
-            <div class="status" *ngIf="error">
-              <span class="dot err"></span><span class="error">{{ error }}</span>
-            </div>
-          </div>
-
-          <div class="row" *ngIf="networkWarn">
-            <div class="hint">Nu ești pe <b>Hardhat (31337)</b>. </div>
-            <button class="btn" (click)="ensureHardhatNetwork()" [disabled]="switching">
-              {{ switching ? 'Comută rețeaua…' : 'Comută pe Hardhat' }}
-            </button>
-          </div>
-
-          <div *ngIf="address" class="kv">
-            <div>Adresa</div>
-            <div>
-              <code>{{ address }}</code>
-              <button class="btn" (click)="copy(address)">Copiază</button>
-            </div>
-
-            <div>JWT</div>
-            <div>
-              <code *ngIf="token">{{ token | slice:0:42 }}…</code>
-              <button class="btn" *ngIf="token" (click)="copy(token)">Copiază</button>
-            </div>
-
-            <div>ClientId</div>
-            <div><code>{{ clientId || '—' }}</code></div>
-          </div>
-
-          <div *ngIf="me">
-            <div class="muted">/me response</div>
-            <pre>{{ me | json }}</pre>
-          </div>
+<div class="page">
+  <div class="card">
+    <div class="grid">
+      <div class="row">
+        <img src="Meta1.png">
+        <button class="btn btn-primary btn-sm" (click)="login()" [disabled]="loading || switching">
+          {{ loading ? 'Se conectează…' : 'Conectează-te cu MetaMask' }}
+        </button>
+        <div class="status" *ngIf="error">
+          <span class="dot err"></span><span class="error">{{ error }}</span>
         </div>
       </div>
     </div>
+  </div>
+</div>
