@@ -1,1 +1,4 @@
+<ng-container *ngIf="user.loggedIn$ | async">
+  <app-navbar></app-navbar>
+</ng-container>
 <router-outlet></router-outlet>
