@@ -10,7 +10,8 @@ import { loadAllowedAddresses } from "./utils/allowlist.js";
 import { ensureSchema } from "../src/utils/db/ensure-schema.js"
 import { seedHardhatUsers } from "../src/utils/seed-hardhat-users.js";
 import { usersRouter } from "./routes/users.routes.js";
-
+import { photosRouter } from "./routes/photo.routes.js";
+import { ensureDirs } from "./utils/fs.js";
 const app = express();
 
 
@@ -38,6 +39,7 @@ app.get("/config", (req, res) => res.json({
 
 app.use("/auth", authRouter);
 app.use("/users", usersRouter);
+app.use("/photos", photosRouter);
 app.get("/me", jwtGuard, (req, res) => {
   res.json({ user: req.user });
 });
@@ -57,6 +59,7 @@ const start = async () => {
   try {
 
     await ensureSchema(); 
+    await ensureDirs();
     await seedHardhatUsers(); 
 
     const set = await loadAllowedAddresses();
