@@ -27,9 +27,7 @@ export class UserProfileComponent implements OnInit {
     created_at: [{ value: '', disabled: true }],
     updated_at: [{ value: '', disabled: true }],
   });
-
   ngOnInit(): void {
-    // Populează formularul din DB user
     this.userService.dbUser$.subscribe((u) => {
       if (!u) return;
       this.form.patchValue({
@@ -50,33 +48,30 @@ export class UserProfileComponent implements OnInit {
   async save() {
     this.error = '';
     this.okMessage = '';
-    const addr = this.form.getRawValue().eth_address;
-    const first_name = this.form.get('first_name')?.value || '';
-    const last_name  = this.form.get('last_name')?.value || '';
-    if (!addr) { this.error = 'Nu există adresă de utilizator.'; return; }
-
     this.loading = true;
-    try {
-      const headers: Record<string, string> = { 'Content-Type': 'application/json' };
-      if (this.siwe.token) headers['Authorization'] = `Bearer ${this.siwe.token}`;
 
-      const resp = await fetch(`http://localhost:4000/users/${addr}`, {
-        method: 'PUT',
-        headers,
-        credentials: 'include',
-        body: JSON.stringify({ first_name, last_name }),
+    try {
+      const raw = this.form.getRawValue();
+      const addr = (raw.eth_address || '').toString().toLowerCase();
+      const first_name = (this.form.get('first_name')?.value || '').toString();
+      const last_name = (this.form.get('last_name')?.value || '').toString();
+
+      if (!addr) throw new Error('Adresa lipsește.');
+      const updated = await this.userService.updateByAddress(addr, { first_name, last_name });
+      await this.userService.refreshByAddress(addr);
+
+      const u = this.userService.dbUser ?? updated;
+      this.form.patchValue({
+        first_name: u.first_name ?? first_name,
+        last_name: u.last_name ?? last_name,
+        updated_at: u.updated_at ? new Date(u.updated_at).toLocaleString() : '',
       });
 
-      const data = await resp.json().catch(() => ({}));
-      if (!resp.ok) throw new Error(data?.error || `Update failed (${resp.status})`);
-
-      // Reîmprospătează user-ul din DB în serviciu
-      await this.userService.refreshByAddress(addr);
-      this.zone.run(() => this.okMessage = 'Profil actualizat cu succes.');
+      this.okMessage = 'Profil actualizat cu succes.';
     } catch (e: any) {
-      this.zone.run(() => this.error = e?.message || 'Eroare la actualizare.');
+      this.error = e?.message || 'Eroare la actualizare.';
     } finally {
-      this.zone.run(() => this.loading = false);
+      this.loading = false;
     }
   }
 }

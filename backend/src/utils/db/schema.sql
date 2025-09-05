@@ -130,3 +130,8 @@ SELECT
 FROM photos p
 LEFT JOIN users u ON u.eth_address = p.owner_address;
 
+ALTER TABLE users
+  ADD COLUMN enc_pubkey_base64 TEXT NULL AFTER last_name;
+
+ALTER TABLE photo_keys
+  ADD COLUMN sender_pubkey_uncomp TEXT NULL AFTER wrap_version;
