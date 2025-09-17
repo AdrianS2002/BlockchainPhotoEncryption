@@ -133,4 +133,18 @@ export class UserService {
             if (newAddr !== currentDbAddr) { this.refreshByAddress(newAddr); }
         });
     }
+
+    async getAll(): Promise<DbUser[]> {
+        const headers: Record<string, string> = {};
+        if (this.siwe.token) headers['Authorization'] = `Bearer ${this.siwe.token}`;
+
+        const url = `${this.api}/users`;
+        console.log('[UserService] GET all users ->', url);
+        const resp = await fetch(url, { headers, credentials: 'include' });
+        const data = await resp.json().catch(() => []);
+        console.log('[UserService] getAll() raw data:', data);
+        if (!resp.ok) throw new Error(data?.error || `GET ${url} -> ${resp.status}`);
+        return (data.items ?? []) as DbUser[];
+    }
+
 }

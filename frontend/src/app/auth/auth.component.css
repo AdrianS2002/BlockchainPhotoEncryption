@@ -25,3 +25,7 @@
   justify-content: center;
   margin: 0 auto;                   
 }
+
+.options{
+  background-color: var(--background-color);
+}
