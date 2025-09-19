@@ -32,9 +32,10 @@ export const UserService = {
 
     async list(query) {
         const page = Number(query?.page ?? 1);
-        const limit = Number(query?.limit ?? 20);
+        const limit = Number(query?.limit ?? 90);
         const search = String(query?.search ?? "");
         return UserRepository.list({ page, limit, search });
+        
     },
 
     async update(id, dto) {
