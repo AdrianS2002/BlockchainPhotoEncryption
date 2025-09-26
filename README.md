@@ -98,14 +98,14 @@ npx hardhat run scripts/deploy.js --network localhost
 
 ## Interface
 ### Login 
-<img width="872" height="620" alt="image" src="https://github.com/user-attachments/assets/0a8804b1-2313-4286-b6c2-d24c25c2b8b9" />
+<img width="872" height="620" alt="image" src="https://github.com/user-attachments/assets/0a8804b1-2313-4286-b6c2-d24c25c2b8b9" /><br>
 ### Send And Encrypt an image 
-<img width="800" height="657" alt="image" src="https://github.com/user-attachments/assets/ac6deca3-5ad5-4d62-ad44-c798ee9b3cb5" />
+<img width="872" height="620" alt="image" src="https://github.com/user-attachments/assets/ac6deca3-5ad5-4d62-ad44-c798ee9b3cb5" /><br>
 - Encryption process
- <img width="948" height="679" alt="image" src="https://github.com/user-attachments/assets/d6986f5c-335c-4025-a872-79dfadfd7ae6" />
+ <img width="872" height="620" alt="image" src="https://github.com/user-attachments/assets/d6986f5c-335c-4025-a872-79dfadfd7ae6" /><br>
 
 ### Decryption 
-<img width="1221" height="711" alt="image" src="https://github.com/user-attachments/assets/025f9051-943d-4b37-919f-0875a0800229" />
+<img width="872" height="620" alt="image" src="https://github.com/user-attachments/assets/025f9051-943d-4b37-919f-0875a0800229" /><br>
 ### User Profile
-<img width="737" height="462" alt="image" src="https://github.com/user-attachments/assets/f047da60-742b-458e-b681-341a72759633" />
+<img width="872" height="620" alt="image" src="https://github.com/user-attachments/assets/f047da60-742b-458e-b681-341a72759633" /><br>
 
