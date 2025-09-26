@@ -6,7 +6,7 @@ This project is built with:
 - **MySQL** for storing photo metadata
 - **Express.js (Node.js)** for the backend REST API.  
 - **Angular** for the frontend web application.  
-
+- **Hardhat** for compiling contracts
 ---
 
 ## Features
@@ -64,16 +64,21 @@ When a user uploads a photo:
 1. Recipient pays the **unlock fee** (`decryptFeeWei`) on-chain.  
 2. Backend returns the wrapped AES key (only if unlocked).  
 3. Recipient unwraps the AES key with their Ethereum private key.  
-4. The encrypted file is downloaded and decrypted with **AES-256-GCM**, restoring the original photo.
+4. The encrypted file is downloaded and decrypted with **AES-256-GCM**, restoring the original photo
 
 ## Setup
 ### Prerequisites
 - Node.js **18+**  
 - npm **9+** 
 - MySQL **8+**   
-- MetaMask
+- MetaMask web extension
 - Hardhat
 ### Config
+Add to metamusk a new network 
+-name : localhost
+-RPC Url: http://127.0.0.1:8545/
+-chain ID: 1337
+
 ```bash
 cd backend
 npm install
@@ -90,3 +95,17 @@ npm install
 npx hardhat node
 npx hardhat run scripts/deploy.js --network localhost
 ```
+
+## Interface
+### Login 
+<img width="872" height="620" alt="image" src="https://github.com/user-attachments/assets/0a8804b1-2313-4286-b6c2-d24c25c2b8b9" />
+### Send And Encrypt an image 
+<img width="800" height="657" alt="image" src="https://github.com/user-attachments/assets/ac6deca3-5ad5-4d62-ad44-c798ee9b3cb5" />
+- Encryption process
+ <img width="948" height="679" alt="image" src="https://github.com/user-attachments/assets/d6986f5c-335c-4025-a872-79dfadfd7ae6" />
+
+### Decryption 
+<img width="1221" height="711" alt="image" src="https://github.com/user-attachments/assets/025f9051-943d-4b37-919f-0875a0800229" />
+### User Profile
+<img width="737" height="462" alt="image" src="https://github.com/user-attachments/assets/f047da60-742b-458e-b681-341a72759633" />
+
