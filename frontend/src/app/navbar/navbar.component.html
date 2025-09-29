@@ -1,0 +1,11 @@
+<header class="header">
+  <nav class="nav">
+    <a (click)="navigateToEncrypt()" class="nav-item">Encrypt</a>
+    <a (click)="navigateToDecrypt()" class="nav-item">Decrypt</a>
+    <a (click)="navigateToUserProfile()" class="nav-item">UserProfile</a>
+  </nav>
+
+  <button class="logout-btn" *ngIf="user.loggedIn$ | async" (click)="logout()">
+    Logout
+  </button>
+</header>

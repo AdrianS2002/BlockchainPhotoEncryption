@@ -1,0 +1,31 @@
+.page .card .grid .row {
+  display: flex;
+  flex-direction: column;
+  align-items: center;   
+  gap: 1rem;
+  text-align: center;
+}
+
+.page .card .grid .row img {
+  max-width: 160px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+.btn-sm {
+  padding: 0.5rem 1rem;              
+  font-size: 0.9rem;
+  border-radius: calc(var(--border-radius) - 2px);
+}
+
+.row .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;                   
+}
+
+.options{
+  background-color: var(--background-color);
+}

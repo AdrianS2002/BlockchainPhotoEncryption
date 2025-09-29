@@ -1,0 +1,35 @@
+<div class="page">
+  <div class="card card-tight">
+    <h2 class="title">Decryption</h2>
+    <div class="grid-cards">
+      <div class="photo-card" *ngFor="let it of items; trackBy: trackById">
+        <div class="img-wrap" [class.encrypted]="it.encrypted">
+          <img [src]="it.imageUrl" alt="image" />
+          <div class="overlay" *ngIf="it.encrypted">
+            <div class="overlay-inner">
+              <div class="lock">🔒</div>
+              <div class="hint">Encrypted image</div>
+              <button class="btn btn-primary" (click)="decrypt(it)" [disabled]="it.decrypting">
+                {{ it.decrypting ? 'Decrypting…' : 'Decrypt' }}
+              </button>
+            </div>
+          </div>
+          <div class="overlay transparent" *ngIf="it.decrypting">
+            <div class="spinner"></div>
+          </div>
+        </div>
+        <div class="meta">
+          <div class="from-label">From</div>
+          <div class="from-value">
+            <span class="sender-name">{{ it.sender.name || 'Unknown' }}</span>
+            <span class="sender-addr">{{ short(it.sender.address) }}</span>
+          </div>
+          <div class="status" [class.ok]="!it.encrypted" [class.warn]="it.encrypted">
+            {{ it.encrypted ? 'Encrypted' : 'Decrypted' }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

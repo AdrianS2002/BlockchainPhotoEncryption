@@ -1,0 +1,15 @@
+<div class="page">
+  <div class="card">
+    <div class="grid">
+      <div class="row">
+        <img src="Meta1.png">
+        <button class="btn btn-primary btn-sm" (click)="login()" [disabled]="loading || switching">
+          {{ loading ? 'Se conectează…' : 'Conectează-te cu MetaMask' }}
+        </button>
+        <div class="status" *ngIf="error">
+          <span class="dot err"></span><span class="error">{{ error }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
